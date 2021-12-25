@@ -88,6 +88,11 @@ if (isset($_POST['submit'])) {
         $mail->SMTPAuth   = true; //Enable SMTP authentication
         $mail_addr = getenv('MAIL_ADDR');
         $mail_password = getenv('MAIL_PASSWD');
+        if (!isset($mail_addr) || !isset($mail_password))
+        {
+            fwrite(STDERR, "Error: export mail address and password.\n");
+            exit(1);
+        }
         $mail->Username   = $mail_addr; //SMTP username
         $mail->Password   = $mail_password; //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
