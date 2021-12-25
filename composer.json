@@ -1,0 +1,21 @@
+{
+    "name": "venkatesh/registration-php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "venkateshht",
+            "email": "shariharanvenkatesh@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    },
+    "autoload": {
+        "psr-0": {
+            "Application": "src/"
+        }
+    },
+    "scripts": {
+        "serve": ["php -S localhost:8080 -t ./src"]
+    }
+}
