@@ -4,7 +4,75 @@
         <meta charset="UTF-8">
         <title>Login</title>
     </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            position: relative;
+        }
+        body {
+            background: url('greek-vase.png');
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            background-repeat: repeat;
+            background-size: 15.62em 15.62em;
+            font-family: "Montserrat", sans-serif;
+            scroll-behavior: smooth;
+        }
+        nav {
+            padding: 20px;
+            margin: 0px;
+            background-color: #343334;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            padding: 13px;
+            margin: 10px;
+            background-color: #777;
+            display: inline-block;
+            text-align: center;
+        }
+        nav  li a {
+            color: yellow;
+            text-decoration: none;
+        }
+        input[type=password],
+        input[type=email]
+        {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+        .submit {
+              background-color: #04AA6D;
+              color: white;
+              padding: 16px 20px;
+              margin: 8px 0;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              opacity: 0.9;
+        }
+    </style>
     <body>
+
+<nav>
+<ul >
+    <li><a href="./index.php">Home</a></li>
+    <li><a href="./register.php">Register</a></li>
+<ul>
+</nav>
         <h1>Login</h1>
         <form action="" method="POST">
             <label for="email">
@@ -17,7 +85,7 @@
                 <input type="password" name="password" id="password" placeholder="Enter password:" required>
             </label>
             <br>
-            <input type="submit" name="submit" value="Login">
+            <input type="submit" name="submit" class="submit" value="Login">
         </form>
 
 <?php
@@ -47,7 +115,7 @@ if (isset($_POST['submit'])) {
             exit();
         }
     }
-    echo "No account is associated with this mail addresss, you Register";
+    echo "No account is associated with this mail addresss, you can Register";
     $mysqli->close();
 }
 ?>

@@ -4,32 +4,99 @@
         <meta charset="UTF-8">
         <title>Register</title>
     </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            position: relative;
+        }
+        body {
+            background: url('greek-vase.png');
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            background-repeat: repeat;
+            background-size: 15.62em 15.62em;
+            font-family: "Montserrat", sans-serif;
+            scroll-behavior: smooth;
+        }
+        nav {
+            padding: 20px;
+            margin: 0px;
+            background-color: #343334;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            padding: 13px;
+            margin: 10px;
+            background-color: #777;
+            display: inline-block;
+            text-align: center;
+        }
+        nav  li a {
+            color: yellow;
+            text-decoration: none;
+        }
+        input[type=text], input[type=password],
+        input[type=email]
+        {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          display: inline-block;
+          border: none;
+          background: #f1f1f1;
+        }
+        .submit {
+              background-color: #04AA6D;
+              color: white;
+              padding: 16px 20px;
+              margin: 8px 0;
+              border: none;
+              cursor: pointer;
+              width: 100%;
+              opacity: 0.9;
+        }
+    </style>
+
     <body>
-        <h1>Register now</h1>
+<nav>
+<ul >
+    <li><a href="./index.php">Home</a></li>
+    <li><a href="./login.php">Login</a></li>
+<ul>
+</nav>
+        <h1 style="padding-top: 10px;">Register now</h1>
         <form action="" method="POST">
             <label for="f_name">
-                First name:
+                <b>First name:</b>
                 <input type="text" name="f_name" id="f_name" placeholder="Enter first name:" required>
             </label>
             <br>
             <label for="l_name">
-                Last name:
+                <b>Last name:</b>
                 <input type="text" name="l_name" id="l_name"placeholder="Enter last name:" required>
             </label>
             <br>
             <label for="email">
-                E-mail:
+                <b>E-mail:</b>
                 <input type="email" name="email" id="email" placeholder="Enter E-mail address:" required>
             </label>
             <br>
             <label for="ph_num">
-                Phone number:
-                <input type="tel" name="ph_num" id="ph_num" placeholder="Enter Phone number:" required>
+                <b>Phone number:</b>
+                <input type="text" name="ph_num" id="ph_num" placeholder="Enter Phone number:" required>
             </label>
             <br>
-            <input type="submit" name="submit" value="Register">
+            <input type="submit" name="submit" class="submit" value="Register">
         </form>
-        <a href="login.php">Login</a>
 
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
@@ -37,6 +104,9 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php';
+
+$upload_dir = "uploads/pro_pics/";
+$default_pic_path = $upload_dir . "default.png";
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -71,10 +141,11 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    $query = "INSERT INTO registered_users(f_name, l_name, phone, email, password_hash) "
-        ."VALUES(?, ?, ?, ?, ?)";
+    $query = "INSERT INTO registered_users(f_name, l_name, phone, email, "
+        . "password_hash, p_pic_path) VALUES(?, ?, ?, ?, ?, ?)";
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("sssss", $f_name, $l_name, $ph_num, $email, $hash);
+    $stmt->bind_param("ssssss", $f_name, $l_name, $ph_num, $email,
+        $hash, $default_pic_path);
     $stmt->execute();
     $mysqli->close();
 
