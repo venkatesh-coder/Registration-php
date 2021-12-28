@@ -1,0 +1,1 @@
+CREATE TABLE registered_users(id SERIAL, f_name VARCHAR(30) NOT NULL, l_name VARCHAR(30) NOT NULL, phone VARCHAR(18) NOT NULL, email VARCHAR(100) NOT NULL, password_hash VARCHAR(60) NOT NULL, p_pic_path VARCHAR(60), about_you VARCHAR(200));
